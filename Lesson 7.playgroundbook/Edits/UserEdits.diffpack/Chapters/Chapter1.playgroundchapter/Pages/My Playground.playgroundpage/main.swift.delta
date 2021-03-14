@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import Foundation
+
+enum gameDownload: Error{
+    
+    case directXDowload
+    case serverError(error: Int)
+    case notFormatGame
+}
+
+struct Game {
+    var game: String
+    var size: Int
+}
+
+class dowloadGAME{
+    
+    var wowDownload=[
+        "WoW.LK" : Game(game: "WoW Lich King", size: 128),
+        "WoW.C" : Game(game: "WoW Cataclysm", size: 233),
+        "WoW.P" : Game(game: "WoW Pandaria", size: 432)
+        
+    ]
+    var sizeDownload = 250
+    var errorValue = 404
+    
+    func downloadItem(itemNamed name: String, error:Int) throws {
+        
+        guard let game = wowDownload[name] else {
+            throw gameDownload.directXDowload
+        }
+        
+        guard game.size &lt; sizeDownload else {
+            throw gameDownload.notFormatGame
+        }
+        
+        guard error == 250 else {
+            throw gameDownload.serverError(error: errorValue)
+        }
+        
+        print("Загружена игра \(name) размером \(game.size)")
+        
+    }
+}
+
+
+let WOW = [
+    "LK" : "WoW.LK",
+    "C" : "WoW.c",
+    "P": "WoW.P"]
+
+func download(warcraft:String, funcDownload: dowloadGAME) throws {
+    let serverMessage = 250
+    let warcraftView = WOW[warcraft] ?? "LoadScreen"
+    try funcDownload.downloadItem(itemNamed: warcraftView, error: serverMessage)
+}
+
+do {
+    try download(warcraft: "LK", funcDownload: dowloadGAME())
+}catch gameDownload.directXDowload{
+    print("Скачайте новую версию DerectX")
+}catch gameDownload.notFormatGame{
+    print("Файл иммет другой формат")
+}catch gameDownload.serverError(let errorCode){
+    print("Серверная ошибка \(errorCode), попробуйте в другой раз ")
+}
+do {
+    try download(warcraft: "C", funcDownload: dowloadGAME())
+}catch gameDownload.directXDowload{
+    print("Скачайте новую версию DerectX")
+}catch gameDownload.notFormatGame{
+    print("Файл иммет другой формат")
+}catch gameDownload.serverError(let errorCode){
+    print("Серверная ошибка \(errorCode), попробуйте в другой раз ")
+}
+
+do {
+    try download(warcraft: "P", funcDownload: dowloadGAME())
+}catch gameDownload.directXDowload{
+    print("Скачайте новую версию DerectX")
+}catch gameDownload.notFormatGame{
+    print("Файл иммет другой формат")
+}catch gameDownload.serverError(let errorCode){
+    print("Серверная ошибка \(errorCode), попробуйте в другой раз ")
+}
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 2292}</string>
+			<key>OriginalContent</key>
+			<string>
+</string>
+			<key>OriginalRange</key>
+			<string>{0, 1}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
